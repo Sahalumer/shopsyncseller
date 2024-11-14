@@ -24,7 +24,12 @@ class CustomeHomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               if (authState is FetchSuccess) {
                 return AppBar(
                   title: Text("Hi, ${authState.userModel.username}"),
-                  actions: const [Icon(Icons.notifications)],
+                  actions: const [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.notifications),
+                    ),
+                  ],
                 );
               }
               return AppBar();
@@ -33,7 +38,12 @@ class CustomeHomeAppbar extends StatelessWidget implements PreferredSizeWidget {
         } else if (storeState is StoreDetailsLoaded) {
           return AppBar(
             title: Text(storeState.storeDetails.shopName),
-            actions: const [Icon(Icons.notifications)],
+            actions: const [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(Icons.notifications),
+              )
+            ],
           );
         }
         return AppBar();
