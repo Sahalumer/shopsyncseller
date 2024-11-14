@@ -1,0 +1,2 @@
+String? globalUid;
+String? addedProductId;

@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "85146580525",
+    "project_id": "shopsync-d1c30",
+    "storage_bucket": "shopsync-d1c30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85146580525:android:f71652228992ee1434eaa4",
+        "android_client_info": {
+          "package_name": "com.example.buyersshopsync"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85146580525-7vu83ao7hb54cu7vmfag42m3i12qabn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2_F6eaBmSr6z6A5oWJ6hNXI_Mc3TtVPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85146580525-7vu83ao7hb54cu7vmfag42m3i12qabn3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "85146580525-0c38ed36uuep1urojip246v1u1fbr23f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sellershopsync"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85146580525:android:23c8abdfe7828f3e34eaa4",
+        "android_client_info": {
+          "package_name": "com.example.shopsyncseller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85146580525-7vu83ao7hb54cu7vmfag42m3i12qabn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2_F6eaBmSr6z6A5oWJ6hNXI_Mc3TtVPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85146580525-7vu83ao7hb54cu7vmfag42m3i12qabn3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "85146580525-0c38ed36uuep1urojip246v1u1fbr23f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sellershopsync"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
