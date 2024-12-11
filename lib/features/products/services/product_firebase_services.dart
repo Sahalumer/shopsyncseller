@@ -3,7 +3,6 @@ import 'package:shopsyncseller/features/products/models/offer_model.dart';
 import 'package:shopsyncseller/features/products/models/offer_product_model.dart';
 import 'package:shopsyncseller/features/products/models/product_model.dart';
 import 'package:shopsyncseller/features/supplier/models/supplier_model.dart';
-import 'package:shopsyncseller/utils/constants/store_user.dart';
 
 class ProductFirebaseServices {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -34,12 +33,11 @@ class ProductFirebaseServices {
           .doc(uid)
           .collection('products')
           .add(product.toMap());
-      addedProductId = docRef.id;
       product.id = docRef.id;
       await docRef.set(product.toMap(), SetOptions(merge: true));
-
       return product.id;
     } catch (e) {
+      print("Error adding product: $e");
       return null;
     }
   }
@@ -54,7 +52,9 @@ class ProductFirebaseServices {
           .collection('products')
           .doc(product.id)
           .set(product.toMap(), SetOptions(merge: true));
-    } catch (e) {}
+    } catch (e) {
+      print("Error updating product: $e");
+    }
   }
 
   Future<void> deleteProduct(String uid, String productId) async {

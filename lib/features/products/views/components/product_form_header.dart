@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shopsyncseller/utils/media_query/media_query.dart';
@@ -13,20 +14,46 @@ class ProductFormHeader extends StatefulWidget {
 
 class _ProductFormHeaderState extends State<ProductFormHeader> {
   final ImagePicker _picker = ImagePicker();
+  final FirebaseStorage _storage = FirebaseStorage.instance;
   Future<void> _pickImages() async {
     final List<XFile> pickedFiles = await _picker.pickMultiImage();
+    for (var file in pickedFiles) {
+      final imageUrl = await _uploadImageToFirebase(File(file.path));
+      if (imageUrl != null) {
+        setState(() {
+          widget.images.add(imageUrl);
+        });
+      }
+    }
     setState(() {
       widget.images.addAll(pickedFiles.map((file) => file.path).toList());
     });
+  }
+
+  Future<String?> _uploadImageToFirebase(File file) async {
+    try {
+      final fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      final ref = _storage.ref().child('product_images/$fileName');
+      final uploadTask = await ref.putFile(file);
+      final url = await uploadTask.ref.getDownloadURL();
+      return url;
+    } catch (e) {
+      print("Error uploading image: $e");
+      return null;
+    }
   }
 
   Future<void> _captureImage() async {
     final XFile? capturedImage =
         await _picker.pickImage(source: ImageSource.camera);
     if (capturedImage != null) {
-      setState(() {
-        widget.images.add(capturedImage.path);
-      });
+      final imageUrl = await _uploadImageToFirebase(File(capturedImage.path));
+
+      if (imageUrl != null) {
+        setState(() {
+          widget.images.add(imageUrl);
+        });
+      }
     }
   }
 

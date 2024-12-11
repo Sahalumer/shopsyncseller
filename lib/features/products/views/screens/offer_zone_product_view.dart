@@ -13,7 +13,6 @@ class OfferZoneProductView extends StatelessWidget {
 
     return BlocListener<OfferProductBloc, OfferProductState>(
       listener: (context, state) {
-        print('Operation Success, Fetching products...');
         if (state is OfferProductOperationSuccess) {
           context.read<OfferProductBloc>().add(FetchOfferProducts());
         }
@@ -27,9 +26,21 @@ class OfferZoneProductView extends StatelessWidget {
           } else if (state is OfferProductLoading) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            print("the current state is $state");
             return Center(
-              child: Text("Unexpected state: $state"),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Unexpected state: $state"),
+                  ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<OfferProductBloc>()
+                          .add(FetchOfferProducts());
+                    },
+                    child: const Text("Retry"),
+                  ),
+                ],
+              ),
             );
           }
         },

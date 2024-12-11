@@ -13,6 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc(this._authService, this._sharedPrefService) : super(AuthInitial()) {
     on<SignUpEvent>((event, emit) async {
+      
       emit(AuthLoading());
       try {
         await _authService.signUpUser(event.userModel, event.password);

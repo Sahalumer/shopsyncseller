@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shopsyncseller/features/products/models/product_model.dart';
 import 'package:shopsyncseller/features/products/views/screens/product_detailed_view.dart';
@@ -54,7 +53,7 @@ class NormalProductComponent extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
-                      image: FileImage(File(productModel.pictures[0])),
+                      image: NetworkImage(productModel.pictures[0]),
                       fit: BoxFit.cover,
                     ),
                   ),

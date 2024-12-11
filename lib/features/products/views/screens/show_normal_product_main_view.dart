@@ -36,16 +36,27 @@ class ShowNormalProductMainView extends StatelessWidget {
             ),
           );
         } else if (state is ProductLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (state is EmptyProduct) {
-          return Center(
+          return const Center(
             child: Text("No products Yet"),
           );
         }
         return Center(
-          child: Text("Not Mentiond State , the State: $state"),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Unexpected state: $state"),
+              ElevatedButton(
+                onPressed: () {
+                  context.read<ProductBloc>().add(FetchProducts());
+                },
+                child: const Text("Retry"),
+              ),
+            ],
+          ),
         );
       },
     );

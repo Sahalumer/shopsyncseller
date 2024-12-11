@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shopsyncseller/features/products/models/offer_product_model.dart';
 import 'package:shopsyncseller/features/products/views/screens/offer_product_detailed_view.dart';
@@ -53,7 +52,7 @@ class OfferProductComponents extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
-                      image: FileImage(File(product.pictures[0])),
+                      image: NetworkImage(product.pictures[0]),
                       fit: BoxFit.cover,
                     ),
                   ),
