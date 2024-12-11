@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shopsyncseller/features/products/models/offer_product_model.dart';
 import 'package:shopsyncseller/features/products/views/screens/offer_product_detailed_view.dart';
@@ -22,10 +24,17 @@ class OfferProductComponents extends StatelessWidget {
     final hasSpecialOffer = product.offer?.isSpecialOffer ?? false;
     final hasBuyGetOffer = product.offer?.isBuyGetOffer ?? false;
 
+    // Determine if the image is a network URL or a local file
+    final imageProvider = product.pictures[0].startsWith('http')
+        ? NetworkImage(product.pictures[0]) as ImageProvider
+        : FileImage(File(product.pictures[0]));
+
     return InkWell(
       onTap: () {
         CustomNavigator.goTo(
-            context, OfferProductDetailedView(productId: product.id!));
+          context,
+          OfferProductDetailedView(productId: product.id!),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -52,7 +61,7 @@ class OfferProductComponents extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
-                      image: NetworkImage(product.pictures[0]),
+                      image: imageProvider,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -125,7 +134,7 @@ class OfferProductComponents extends StatelessWidget {
                 ),
               SizedBox(
                 height: size.scaledHeight(1),
-              )
+              ),
             ],
           ),
         ),

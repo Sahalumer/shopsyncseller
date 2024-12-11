@@ -43,6 +43,7 @@ class _ProductAddEditViewState extends State<ProductAddEditView> {
 
   bool isOffer = false;
   bool isSupplier = false;
+  bool _isLoading = false;
   String? supplierId = "sample";
   List<String> pictures = [];
   List<ReviewModel> reviews = [];
@@ -94,6 +95,8 @@ class _ProductAddEditViewState extends State<ProductAddEditView> {
 
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
+      setState(() => _isLoading = true);
+
       final product = _buildProductModel();
 
       if (isNeed) {
@@ -101,6 +104,8 @@ class _ProductAddEditViewState extends State<ProductAddEditView> {
       } else {
         await _updateProduct(product);
       }
+
+      setState(() => _isLoading = false);
     }
   }
 
@@ -233,7 +238,8 @@ class _ProductAddEditViewState extends State<ProductAddEditView> {
                   ),
                 ProductFormFooter(
                   buttonText: isNeed ? "Add" : "Update",
-                  onSubmit: _submitForm,
+                  onSubmit: _isLoading ? () {} : _submitForm,
+                  isLoading: _isLoading,
                 ),
               ],
             ),

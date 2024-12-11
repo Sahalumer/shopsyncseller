@@ -5,6 +5,7 @@ import 'package:shopsyncseller/features/products/views/widgets/custom_pop_up_men
 import 'package:shopsyncseller/utils/constants/application_colors.dart';
 import 'package:shopsyncseller/utils/media_query/media_query.dart';
 import 'package:shopsyncseller/utils/navigator/navigator.dart';
+import 'dart:io';
 
 class NormalProductComponent extends StatelessWidget {
   final ProductModel productModel;
@@ -19,14 +20,19 @@ class NormalProductComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = CustomMediaQuery(context);
 
+    final imageProvider = productModel.pictures[0].startsWith('http')
+        ? NetworkImage(productModel.pictures[0])
+        : FileImage(File(productModel.pictures[0])) as ImageProvider;
+
     return InkWell(
       onTap: () {
         CustomNavigator.goTo(
-            context,
-            ProductDetailedView(
-              productid: productModel.id!,
-              gridIndex: gridIndex,
-            ));
+          context,
+          ProductDetailedView(
+            productid: productModel.id!,
+            gridIndex: gridIndex,
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -53,7 +59,7 @@ class NormalProductComponent extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
-                      image: NetworkImage(productModel.pictures[0]),
+                      image: imageProvider,
                       fit: BoxFit.cover,
                     ),
                   ),
